@@ -13,9 +13,9 @@ class Spider0908Pipeline(object):  # 需要在setting.py里设置'coolscrapy.pip
     def process_item(self, item, spider):
         # 获取当前工作目录
         base_dir = os.getcwd()
-        fiename = base_dir + '/douban.txt'
+        fiename = base_dir + '/bilibili.txt'
         # 从内存以追加的方式打开文件，并写入对应的数据
         with open(fiename, 'a') as f:
             f.write(item['title'] + ' ')
-            f.write(item['detail'] + '\n')
+            f.write(item['upname'] + '\n')
         return item
