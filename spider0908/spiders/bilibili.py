@@ -9,11 +9,11 @@ from spider0908.items import MovieItem
 class BilibiliSpider(scrapy.Spider):
     name = 'bilibili'
     allowed_domains = ['bilibili.com']
-    start_urls = ['https://www.bilibili.com/video/BV1ht4y177Ef']
+    start_urls = ['https://www.bilibili.com/video/BV1sG41137nu']
 
-    # https://www.bilibili.com/video/BV1wB4y1n7YJ 122
-    # https://www.bilibili.com/video/BV1cq4y1p75J 83
-    # https://www.bilibili.com/video/BV1Pw411o78B 379
+    # https://www.bilibili.com/video/BV1wB4y1n7YJ
+    # https://www.bilibili.com/video/BV1cq4y1p75J
+    # https://www.bilibili.com/video/BV1Pw411o78B
 
     def __init__(self):
         self.count = 0
@@ -34,10 +34,7 @@ class BilibiliSpider(scrapy.Spider):
             for href in items:
                 p1, p2, p3 = href.xpath('//*[@class="video-page-card-small"]/div/div[2]/a/@href').extract_first().partition('?')
                 url = 'https://www.bilibili.com/' + p1.strip('/')
-                # yield scrapy.Request(
-                #     url,
-                #     callback=self.parse
-                # )
+
                 pattern = r"https"
                 matchObj = re.match(pattern, p1)
                 if matchObj is None:
@@ -45,12 +42,3 @@ class BilibiliSpider(scrapy.Spider):
                         url,
                         callback=self.parse
                     )
-                # if matchObj is not None:
-                #     i=(str)(random.randint(1,10))
-                #     j=(str)(random.randint(1,10))
-                #     urls = ['https://www.bilibili.com/video/BV1ne4y1C7Ak','https://www.bilibili.com/video/BV1R24y1o7vq','https://www.bilibili.com/video/BV1Nd4y137Hi']
-                #     for url in urls:
-                #         yield scrapy.Request(
-                #             url,
-                #             callback=self.parse
-                #         )
